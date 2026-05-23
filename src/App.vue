@@ -75,7 +75,10 @@ async function getPort() {
       baseUrl.value = data.url;
       isElectron.value = true;
     }
-  } catch (error) {}
+  } catch (error) {
+    // 非 Electron 环境：使用当前域名作为 API 基础地址
+    baseUrl.value = window.location.origin + "/api";
+  }
 
   config({
     markdownItConfig(md) {
