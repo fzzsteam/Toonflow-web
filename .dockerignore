@@ -1,3 +1,4 @@
 node_modules
 dist
 .git
+src/views/production/components/workbench/generate copy.vue
