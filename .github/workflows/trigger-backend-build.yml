@@ -1,0 +1,21 @@
+name: 触发后端测试构建
+
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    name: 通知后端仓库重新构建
+
+    steps:
+      - name: 触发 Toonflow-app 测试构建
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.BACKEND_DISPATCH_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/fzzsteam/Toonflow-app/dispatches \
+            -d '{"event_type":"frontend-test-updated"}'
+          echo "已通知后端仓库触发测试构建"
